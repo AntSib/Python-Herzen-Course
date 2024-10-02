@@ -66,11 +66,6 @@ def binary_search(secret: int) -> None:
           "after ", str(result["attempt"]), "attempts")
 
 
-def main() -> None:
-    slow_search(int(input("Enter a number between 0 and 10000: ")))
 
-    binary_search(int(input("Enter a number between 0 and 10000: ")))
-
-
-if __name__ == "__main__":
-    main()
+slow_search(int(input("Enter a number between 0 and 10000: ")))
+binary_search(int(input("Enter a number between 0 and 10000: ")))
