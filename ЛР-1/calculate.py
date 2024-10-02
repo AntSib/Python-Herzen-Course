@@ -57,16 +57,12 @@ def test_calc_mod():
     assert calculate("4 % 2") == 0
 
 
-def main() -> None:
-    test_calc_add()
-    test_calc_subtr()
-    test_calc_mult()
-    test_calc_div()
-    test_calc_pow()
-    test_calc_mod()
 
-    print(calculate(input("Enter an expression: ")))
+test_calc_add()
+test_calc_subtr()
+test_calc_mult()
+test_calc_div()
+test_calc_pow()
+test_calc_mod()
 
-
-if __name__ == "__main__":
-    main()
+print(calculate(input("Enter an expression: ")))
