@@ -1,6 +1,7 @@
-# Задание 1.1
+# Задание 1.1 и 1.2
 
 ### Модернизируйте калькулятор из задач 1.2 и 1.4 Лабораторной работы № 2. Добавьте к калькулятору такую настройку как точность вычислений, которая передаётся в виде keyword параметра tolerance со значением по умолчанию 1e−6. На основе переданного значения этого параметра извлеките с помощью вычислений порядок этого значения (например, 6 для 1e−6) в виде отдельной функции convert_precision, вызываемой из calculate. Задокументируйте convert_precision и дополните документацию к calculate в коде. Извлечённый порядок используйте для округления итогового результата в функции calculate. Покройте (напишите) дополнительными тестами convert_precision и calculate в связи с появлением tolerance с помощью пакета pytest.
+### Модернизируйте калькулятор из задачи 1.1. Добавьте переменное количество неименованных аргументов (операндов, ∗args) после параметра action и перед keyword параметром tolerance. К списку поддерживаемых действий добавьте вычисление таких величин как среднее значение (medium), дисперсия (variance), стандартное отклонение (std_deviation), медиана (median, q2, второй квартиль) и межквартильный размах (q3 - q1, разница третьего и первого квартилей). Покройте новые реализованные функции и функцию calculate дополнительными тестами.
 
 ```python
 import logging
@@ -33,7 +34,7 @@ def decoration_logger(func: callable) -> callable:
         
         res = func(operator, *numbers, tolerance=tolerance)
 
-        logger.info(f"result: {res}")                                # logging result
+        logger.info(f"result: {res}")                               # logging result
         return res
     return wrapper
 
@@ -193,15 +194,13 @@ if __name__ == "__main__":
     print(calculate(oper, numbers, tolerance=tol))
 ```
 
-# Задание 1.2
+Отделный файл для тестирования
 
-### Модернизируйте калькулятор из задачи 1.1. Добавьте переменное количество неименованных аргументов (операндов, ∗args) после параметра action и перед keyword параметром tolerance. К списку поддерживаемых действий добавьте вычисление таких величин как среднее значение (medium), дисперсия (variance), стандартное отклонение (std_deviation), медиана (median, q2, второй квартиль) и межквартильный размах (q3 - q1, разница третьего и первого квартилей). Покройте новые реализованные функции и функцию calculate дополнительными тестами.
-
-Отдельный файл со всеми тестами
 ```python
 import pytest
 import statistics           # Using functionality of statistics module for testing
-from calculator_with_tolerance import convert_precision, awailable_operators, summary, mean, variance, std_deviation, median, q3_q1, calculate
+from calculator_with_tolerance import convert_precision, awailable_operators
+from calculator_with_tolerance import summary, mean, variance, std_deviation, median, q3_q1, calculate
 
 
 tolerance_default = 1e-6    # Default tolerance for tests
