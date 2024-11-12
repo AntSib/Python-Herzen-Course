@@ -348,6 +348,7 @@ if __name__ == "__main__":
 ```
 
 Результат работы программы:
+```
 ============================= test session starts =============================
 platform win32 -- Python 3.12.5, pytest-8.3.3, pluggy-1.5.0
 rootdir: C:\Users\Anton\Programms\Python\Herzen git repo\Python-Herzen-Course\ЛР-4
@@ -358,6 +359,7 @@ test_two_sum.py ................                                         [100%]
 Execution time of two_sum is: 0.012390000047162175 milliseconds
 Execution time of two_sum_fast is: 0.006893999889143743 milliseconds
 Execution time of two_sum_hashed_all is: 2894.3197919998784 milliseconds
+```
 
 Анализ:
 Функции тестируются на корректность работы для различных искомых чисел и проверяется корректность вывода при отсутствии подходящего числа.
@@ -497,10 +499,12 @@ if __name__ == "__main__":
 ```
 
 Результат работы программы:
+```
 fib_test function: 832040
 fib_memo_sleeve function: 832040
 fib_memo function: 832040
 fib_cached function: 832040
+```
 
 Анализ:
 В программе реализованы 4 функции для вычисления чисел Фибоначчи: 
@@ -648,6 +652,7 @@ if __name__ == "__main__":
 ```
 
 Результат работы программы:
+```
 ============================= test session starts =============================
 platform win32 -- Python 3.12.5, pytest-8.3.3, pluggy-1.5.0
 rootdir: C:\Users\Anton\Programms\Python\Herzen git repo\Python-Herzen-Course\ЛР-4
@@ -661,6 +666,7 @@ Execution time of fib_test is: 586.8359160001273 milliseconds
 Execution time of fib_memo_sleeve is: 0.0016859997413121164 milliseconds
 Execution time of fib_memo is: 0.006624000234296545 milliseconds
 Execution time of fib_cached is: 0.0025260000256821513 milliseconds
+```
 
 Анализ:
 Программа проверяет корректность вычисления функций для n-ого числа последовательности.
