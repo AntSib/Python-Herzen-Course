@@ -14,8 +14,12 @@ target = 8
 result = two_sum(lst, target)
 print(result)
 ```
-Результат: (0, 6)
+Результат: 
+```python
+(0, 6)
+```
 
+Код программы:
 two_sum_f.py
 ```python
 lst = [i for i in range(1, 16)]
