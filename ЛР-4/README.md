@@ -725,7 +725,6 @@ if __name__ == "__main__":
 ```
 
 Результат работы программы:
-Файл: 
 [Python test email.eml](https://github.com/AntSib/Python-Herzen-Course/blob/main/%D0%9B%D0%A0-4/Python%20test%20email.eml)
 
 Задание 2.2 и 2.3
@@ -811,4 +810,4 @@ plt.savefig('weather_temperatures.png')
 
 Результат работы программы:
 
-Файл: weather_temperatures.png
+Файл: ![Гистограмма температур](weather_temperatures.png)
