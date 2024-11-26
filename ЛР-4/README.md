@@ -726,7 +726,7 @@ if __name__ == "__main__":
 
 Результат работы программы:
 Файл: Python test email.eml
-[Python test email.eml](Python test email.eml)
+[Python test email.eml](/Python test email.eml)
 
 Задание 2.2 и 2.3
 Парсинг сайта погоды (wheather HTML parsing) на простом сайте wttr.in с помощью BeautifulSoup (v4).
