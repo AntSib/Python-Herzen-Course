@@ -725,7 +725,7 @@ if __name__ == "__main__":
 ```
 
 Результат работы программы:
-[Python test email.eml](https://github.com/AntSib/Python-Herzen-Course/blob/main/%D0%9B%D0%A0-4/Python%20test%20email.eml)
+![Python test email.eml](Python_test_email.eml)
 
 Задание 2.2 и 2.3
 Парсинг сайта погоды (wheather HTML parsing) на простом сайте wttr.in с помощью BeautifulSoup (v4).
@@ -810,4 +810,4 @@ plt.savefig('weather_temperatures.png')
 
 Результат работы программы:
 
-Файл: ![Гистограмма температур](weather_temperatures.png)
+![Гистограмма температур](weather_temperatures.png)
