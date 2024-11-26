@@ -517,7 +517,7 @@ if __name__ == "__main__":
 ```
 
 Результат:
-[Demo of search in MongoDB](img/search_in_MongoDB.png)
+![Поиск в MongoDB](img/search_in_MongoDB.png)
 
 Анализ:
 Контекстный менеджер MongoDBConnectManager управляет подключением к MongoDB, автоматически открывая соединение при входе и закрывая при выходе из контекста.
