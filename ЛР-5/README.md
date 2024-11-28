@@ -462,7 +462,7 @@ mongodb_manager.py
 from pymongo import MongoClient
 
 class MongoDBConnectManager(object):
-    def __init__(self, host="mongodb://localhost:27017/", username="admin", password="admin"):
+    def __init__(self, host="mongodb://localhost", port=27017, username="admin", password="admin"):
         """
         Create a new instance of the MongoDBConnectManager class.
 
@@ -472,6 +472,7 @@ class MongoDBConnectManager(object):
         :return: a MongoDBConnectManager instance
         """
         self.host = host
+        self.port = port
         self.username = username
         self.password = password
         self.connection = None
@@ -483,7 +484,7 @@ class MongoDBConnectManager(object):
         :return: the MongoDBConnectManager instance
         """
         self.connection = MongoClient(
-            self.host,
+            self.host, self.port,
             username=self.username, password=self.password,
             authMechanism="SCRAM-SHA-1"
             )
@@ -493,11 +494,12 @@ class MongoDBConnectManager(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self.connection.close()
 
-def main():
-    mongo = MongoDBConnectManager(host="mongodb://localhost:27017/", username="AntSibAdmin", password="AntSibDBPassword")
 
-    with mongo as mongo_client:
-        users = mongo_client.connection['mynewdb']['user']
+def main():
+    mongo = MongoDBConnectManager(host="mongodb://localhost", port=27017, username="AntSibAdmin", password="AntSibDBPassword")
+
+    with mongo:
+        users = mongo.connection['mynewdb']['user']
 
         print(f"All users:")
         found_users = users.find()
@@ -510,6 +512,7 @@ def main():
 
         for user in found_users:
             print(user)
+
 
 if __name__ == "__main__":
     main()
