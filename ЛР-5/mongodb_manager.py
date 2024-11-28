@@ -37,8 +37,8 @@ class MongoDBConnectManager(object):
 def main():
     mongo = MongoDBConnectManager(host="mongodb://localhost", port=27017, username="AntSibAdmin", password="AntSibDBPassword")
 
-    with mongo as mongo_client:
-        users = mongo_client.connection['mynewdb']['user']
+    with mongo:
+        users = mongo.connection['mynewdb']['user']
 
         print(f"All users:")
         found_users = users.find()
