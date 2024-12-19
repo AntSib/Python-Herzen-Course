@@ -127,6 +127,12 @@ class TestBatchCalculatorContextManager(unittest.TestCase):
         with self.assertRaises(ValueError):
             calculate("+ 1 a 3 0.01")
 
+    @classmethod
+    def tearDownClass(self):
+        del self.valid_file_content
+        del self.parsed_file_content
+        del self.invalid_file_content
+
 
 if __name__ == '__main__':
     unittest.main()
