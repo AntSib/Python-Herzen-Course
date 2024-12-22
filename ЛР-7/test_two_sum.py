@@ -17,6 +17,10 @@ from functions.two_sum_fast_f import two_sum_fast
     ]
 )
 def test_two_sum_fast(lst, target, expected):
+    """
+    Test that two_sum_fast function returns expected tuple of two indices
+    whose corresponding elements in the given list add up to the target.
+    """
     assert two_sum_fast(lst, target) == expected
 
 
