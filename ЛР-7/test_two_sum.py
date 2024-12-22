@@ -3,11 +3,14 @@ from functions.two_sum_fast_f import two_sum_fast
 
 @pytest.mark.parametrize(
     "lst, target, expected",
-    [
-        ([1, 2, 3, 4, 5, 6], 7, (0, 5)),
-        ([1, 3, 5, 7, 9], 12, (1, 4)),
-        ([2, 4, 6, 8], 10, (0, 3)),
-        ([1, 2, 3, 4, 5, 6], 20, None),
+    [   
+        ([i for i in range(-10, 5)], -2, (4, 14)),
+        ([i for i in range(1, 7)], 7, (0, 5)),
+        ([i for i in range(1, 10, 2)], 12, (1, 4)),
+        ([i for i in range(1, 10, 2)], 10, (0, 4)),
+        ([-2, -1, 0, 1, 3, 4], 0, (1, 3)),
+        ([-10**9, -2, 0, 3, 10**9], 0, (0, 4)),
+        ([i for i in range(1, 7)], 20, None),
         ([1, 1, 1, 6], 7, (0, 3)),
         ([1], 2, None),
         ([], 5, None),
