@@ -271,7 +271,7 @@ City Shanghai is in China
 
 time_manager.py
 ```python
-	import time
+import time
 
 class Timer:
     def __enter__(self):
