@@ -23,22 +23,23 @@ def gen_bin_tree_recursive(height: int = 6, root: int = 5, left_function = lambd
     :return: The generated binary tree. If height is 0 or less, returns None.
     """
     if not isinstance(height, int):
-        raise InvalidTreeHeight(height)
+        raise InvalidTreeHeight(height)     # Custom exception
     if not isinstance(root, int):
-        raise InvalidTreeRoot(root)
+        raise InvalidTreeRoot(root)         # Custom exception
+
     if height <= 0:
         return None
     
     if not callable(left_function) or not callable(right_function):
-        raise InvalidTreeFunctions(left_function, right_function)
+        raise InvalidTreeFunctions(left_function, right_function)    # Custom exception
 
-    left_leaf:  int = left_leaf_function(root)
-    right_leaf: int = right_leaf_function(root)
+    left_leaf:  int = left_function(root)
+    right_leaf: int = right_function(root)
 
     return {
         str(root): [
-            gen_bin_tree_recursive(height - 1, left_leaf),
-            gen_bin_tree_recursive(height - 1, right_leaf)
+            gen_bin_tree_recursive(height - 1, left_leaf, left_function, right_function),
+            gen_bin_tree_recursive(height - 1, right_leaf, left_function, right_function)
         ]
     }
 
@@ -63,6 +64,7 @@ def gen_bin_tree_iterative(height: int = 6, root: int = 5, left_function = lambd
         raise InvalidTreeHeight(height)
     if not isinstance(root, int):
         raise InvalidTreeRoot(root)
+        
     if height <= 0:
         return None
         
@@ -74,9 +76,6 @@ def gen_bin_tree_iterative(height: int = 6, root: int = 5, left_function = lambd
     
     while stack:
         node, level, parent = stack.popleft()
-
-        if level == 0:
-            continue
         
         left_leaf:  int = left_function(node)
         right_leaf: int = right_function(node)
@@ -93,5 +92,6 @@ def gen_bin_tree_iterative(height: int = 6, root: int = 5, left_function = lambd
     return tree
 
 
-# print(gen_bin_tree_recursive(height_test))
-# print(gen_bin_tree_iterative(height_test))
+# if __name__ == "__main__":
+#     print(gen_bin_tree_recursive(height_test))
+#     print(gen_bin_tree_iterative(height_test))
