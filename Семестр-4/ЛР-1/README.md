@@ -110,6 +110,7 @@ if __name__ == "__main__":
 ```
 
 Анализ:
+<br>
 Рекурсивный метод (gen_bin_tree_recursive):
 
 <ol>
@@ -331,4 +332,5 @@ if __name__ == "__main__":
 ```
 
 Вывод программы:
+<br>
 ![test_bin_tree_output](img/pytest_output.png)
