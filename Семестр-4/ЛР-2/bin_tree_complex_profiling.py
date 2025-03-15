@@ -6,6 +6,24 @@ from bin_tree.bin_tree import gen_bin_tree_recursive, gen_bin_tree_iterative
 from bin_tree.bin_tree_exceptions import InvalidTreeHeight, InvalidTreeRoot, InvalidTreeFunctions
 
 
+def progress_bar(current: int, total: int, func: callable, bar_length=20):
+    """
+    Print a progress bar to the console for a given function.
+
+    :param current: The current iteration of the function.
+    :param total: The total number of iterations for the function.
+    :param func: The function being iterated.
+    :param bar_length: The length of the progress bar (default is 20).
+    """
+    fraction = current / total
+
+    arrow = int(fraction * bar_length - 1) * '-' + '>'
+    padding = int(bar_length - len(arrow)) * ' '
+
+    ending = '\n' if current == total else '\r'
+
+    print('Progress: [%s%s] %d%s of %s' % (arrow, padding, int(fraction*100), '%', str(func.__name__)), end=ending)
+
 def setup_data(length: int) -> list:
     """
     Sets up a list of tuples containing height and random root values for binary tree generation.
@@ -37,8 +55,8 @@ def time_profiler(n_args: int, n_runs: int, func: callable, *args, **kwargs) -> 
 
     run_time = []
     for i in range(n_args):
-        # height = args[i][0]
         run_time.append(timeit.timeit(lambda:func(*args[i], **kwargs), number=n_runs))
+        progress_bar(i + 1, n_args, func)
     return run_time
 
 def setup_plot(functions: list, label: str = None, grid: bool = True, legend: bool = True, savefig: bool = False) -> None:
