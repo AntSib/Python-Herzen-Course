@@ -43,6 +43,17 @@ def db_connector(con: sqlite3.Connection) -> sqlite3.Connection:
         con.commit()
         con.close()
 
+def json_logger(log_file: str) -> json:
+    if os.path.exists(log_file):    # safe read
+        with open(log_file, 'r', encoding='utf-8') as h:
+            try:
+                json_data = json.load(h)
+            except json.JSONDecodeError:
+                json_data = []
+    else:
+        json_data = []
+
+    return json_data
 
 def trace(func: callable = None, *, handle: io.TextIOWrapper | str | sqlite3.Connection = sys.stdout) -> callable:
     """
@@ -73,12 +84,14 @@ def trace(func: callable = None, *, handle: io.TextIOWrapper | str | sqlite3.Con
         result = func(*args, **kwargs)
         datetime_now = datetime.datetime.now()
     
-        if isinstance(handle, io.TextIOWrapper):     # io.TextIOWrapper case
+        if isinstance(handle, io.TextIOWrapper):    # io.TextIOWrapper case
             handle.write(f"{str(func.__name__)}({str((*args, *kwargs))}) -> {str(result)}\n")
-        elif isinstance(handle, str):                # str case
+        elif isinstance(handle, str):               # str case
             if handle.partition('.')[-1] == 'json':
-                with open(handle, 'a') as h:
-                    h.write(json.dumps({'datetime': str(datetime_now), 'func_name': str(func.__name__), 'params': str((*args, kwargs)), 'result': str(result)}) + '\n')
+                json_data = json_logger(handle)
+                json_data.append({'datetime': str(datetime_now), 'func_name': str(func.__name__), 'params': str((*args, kwargs)), 'result': str(result)})
+                with open(handle, 'w') as h:
+                    json.dump(json_data, h, indent=4)
             else:
                 raise Exception(ValueError(f"Wrong extension of handle. Expected: 'json', got: {handle.partition('.')[-1]}"))
         elif isinstance(handle, sqlite3.Connection): # sqlite3.Connection case
@@ -152,7 +165,7 @@ def f2(x):
 
 if __name__ == '__main__':
     f0(5)
-    f1(20)
+    f1(10)
     f2(15)
     
     showlogs(db_log_path)
