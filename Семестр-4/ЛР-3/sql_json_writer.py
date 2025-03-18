@@ -17,6 +17,19 @@ db_log_path:   str = os.path.join(FILE_PATH, db_log)
 
 @contextlib.contextmanager
 def db_connector(con: sqlite3.Connection) -> sqlite3.Connection:
+    """
+    Context manager for database connection.
+
+    Args:
+        con: sqlite3.Connection - Connection to SQLite database.
+
+    Yields:
+        sqlite3.Connection - Connection to SQLite database.
+
+    Notes:
+        Creates 'logtable' table if it does not exist.
+        Commits changes after leaving the context.
+    """
     con.execute('''CREATE TABLE IF NOT EXISTS logtable (
                                         id INTEGER PRIMARY KEY AUTOINCREMENT,
                                         datetime TEXT,
@@ -32,6 +45,26 @@ def db_connector(con: sqlite3.Connection) -> sqlite3.Connection:
 
 
 def trace(func: callable = None, *, handle: io.TextIOWrapper | str | sqlite3.Connection = sys.stdout) -> callable:
+    """
+    A decorator that logs the input, output, and execution details of a function.
+
+    This decorator can log the information to various targets specified by the `handle` argument:
+    - `sys.stdout`: Writes logs to console.
+    - `<filepath>.json`: Appends logs in JSON format to the specified file.
+    - `sqlite3.Connection`: Logs are stored in specified SQLite database table.
+    
+    Args:
+        func: The function to be decorated.
+        handle: The destination for logging. Can be an `sys.stdout`, a filepath string ending in '.json', 
+                or an `sqlite3.Connection` object. Defaults to `sys.stdout`.
+
+    Returns:
+        A wrapper function that logs input, output, execution time, and other details of the decorated function.
+    
+    Raises:
+        Exception: If the handle is unsupported or an unknown type.
+    """
+
     if func is None:
         return lambda func: trace(func, handle=handle)
     
@@ -59,27 +92,23 @@ def trace(func: callable = None, *, handle: io.TextIOWrapper | str | sqlite3.Con
                                     )
                                 )
         else:
-            raise Exception(ValueError("Unknown type of handle: %s" % type(handle)))
+            raise Exception(ValueError("Unsupported type of handle: %s" % type(handle)))
 
         return func(*args, **kwargs)
 
     return inner
 
 
+def showlogs(log_file: str) -> None:
+    """
+    Reads logs from the specified file and prints them to the console.
 
-@trace(handle=sys.stdout)
-def f0(x):
-    return x + 1
+    Args:
+        log_file: str - The file path of the log file. The file should have a '.json' or '.db' extension.
 
-@trace(handle=json_log_path)
-def f1(x):
-    return x + 2
-
-@trace(handle=sqlite3.connect(db_log_path))
-def f2(x):
-    return x + 3
-
-def showlogs(log_file):
+    Raises:
+        Exception: If the file does not exist or cannot be read.
+    """
     if log_file.partition('.')[-1] == 'json':
         try:
             with open(log_file, 'r') as f:
@@ -89,7 +118,7 @@ def showlogs(log_file):
         except Exception as err:
             print(f"Error accured while reading json: {err}")
         finally:
-            return
+            return # exits function to not waste time on further processing
             
     elif log_file.partition('.')[-1] == 'db':
         try:
@@ -102,16 +131,29 @@ def showlogs(log_file):
                 for row in cur:
                     print(row)
         finally:
-            return
+            return # exits function to not waste time on further processing
     else:
         print("Wrong extension of handle. Expected: 'json' or 'db', got: %s" % log_file.partition('.')[-1])
-            
+
+
+### Functions for test purposes
+@trace(handle=sys.stdout)
+def f0(x):
+    return x + 1
+
+@trace(handle=json_log_path)
+def f1(x):
+    return x + 2
+
+@trace(handle=sqlite3.connect(db_log_path))
+def f2(x):
+    return x + 3
+###
 
 if __name__ == '__main__':
-    # f0(0)
-    # f1(20)
-    # f2(15)
+    f0(5)
+    f1(20)
+    f2(15)
     
-    # showlogs(db_log_path)
-    # showlogs(json_log_path)
-    pass
+    showlogs(db_log_path)
+    showlogs(json_log_path)
