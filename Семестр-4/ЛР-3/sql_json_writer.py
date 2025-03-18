@@ -44,6 +44,17 @@ def db_connector(con: sqlite3.Connection) -> sqlite3.Connection:
         con.close()
 
 def json_logger(log_file: str) -> json:
+    """
+    Reads JSON data from a specified log file, if it exists.
+    If the file does not exist or contains invalid JSON, an empty list is returned.
+
+    Args:
+        log_file: str - The path to the JSON log file.
+
+    Returns:
+        list - A list of parsed JSON.
+    """
+
     if os.path.exists(log_file):    # safe read
         with open(log_file, 'r', encoding='utf-8') as h:
             try:
@@ -54,6 +65,7 @@ def json_logger(log_file: str) -> json:
         json_data = []
 
     return json_data
+
 
 def trace(func: callable = None, *, handle: io.TextIOWrapper | str | sqlite3.Connection = sys.stdout) -> callable:
     """
