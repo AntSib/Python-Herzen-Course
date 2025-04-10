@@ -3,7 +3,7 @@ import functools
 import contextlib
 import datetime
 import sqlite3
-from pattents import Singleton
+from patterns import Singleton
 
 
 FILE_PATH:  str = os.path.dirname(os.path.realpath(__file__))
