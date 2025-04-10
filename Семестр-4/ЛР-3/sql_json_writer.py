@@ -111,8 +111,8 @@ def trace(func: callable = None, *, handle: io.TextIOWrapper | str | sqlite3.Con
                 con.execute("INSERT INTO logtable (datetime, func_name, params, result) VALUES (?, ?, ?, ?)",
                                     (
                                         str(datetime_now),
-                                        str(func.__name__), 
-                                        str((*args, *kwargs)), 
+                                        str(func.__name__),
+                                        str((*args, *kwargs)),
                                         str(result)
                                     )
                                 )
