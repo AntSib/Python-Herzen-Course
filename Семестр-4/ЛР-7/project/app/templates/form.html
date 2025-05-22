@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Send width and height
+{% endblock %}
+
+{% block content_title %}
+  Send width and height
+{% endblock %}
+
+{% block style %}
+  <link rel="stylesheet" href="static/style.css">
+{% endblock %}
+
+
+{% block content %}
+<div class="col-md-7">
+
+  <form method="POST" action="/fetch">
+    <input name="codes" placeholder="USD EUR GBP">
+    <button type="submit">Загрузить</button>
+  </form>
+
+  {% if currency_rates %}
+    <table>
+      <tr>
+        <th>Currency</th>
+        <th>Rate</th>
+        <th>Date</th>
+      </tr>
+      {% for c in currency_rates %}
+        <tr>
+          <td>{{ c.currency_code }}</td>
+          <td>{{ c.rate }}</td>
+          <td>{{ c.datetime }}</td>
+
+          <td>
+            <form method="POST" action="/delete/{{ c.currency_code }}">
+                <button type="submit">Удалить</button>
+            </form>
+          </td>
+          
+        </tr>
+      {% endfor %}
+      </tr>
+    </table>
+  {% endif %}
+
+</div>
+
+<!-- <script>
+  document.getElementById('imageForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const width = formData.get('width');
+    const height = formData.get('height');
+    const response = await fetch('/sendimage', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ width, height })
+    });
+    
+    const data = await response.json();
+    if (data.image != undefined) {
+      document.getElementById('resultImage').src = data.image;
+      const resp = document.getElementById('resp')
+      resp.textContent = "Here is our image"
+    }
+  });
+</script> -->
+
+{% endblock %}
