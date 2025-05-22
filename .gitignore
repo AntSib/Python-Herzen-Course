@@ -1,8 +1,10 @@
 /Python-Herzen-Course.code-workspace
 
 .vscode
+.gitignore
 /.venv
 /drafts
+/scraps
 /notes
 /profiler
 
@@ -12,4 +14,3 @@
 /Семестр-4/scraps
 /Семестр-4/ЛР-1/__pycache__
 /Семестр-4/ЛР-3/Задание.md
-/Семестр-4/ЛР-4/__pycache__
