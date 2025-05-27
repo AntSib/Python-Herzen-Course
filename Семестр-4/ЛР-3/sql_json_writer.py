@@ -102,7 +102,7 @@ def trace(func: callable = None, *, handle: io.TextIOWrapper | str | sqlite3.Con
             if handle.partition('.')[-1] == 'json':
                 json_data = json_logger(handle)
                 json_data.append({'datetime': str(datetime_now), 'func_name': str(func.__name__), 'params': str((*args, kwargs)), 'result': str(result)})
-                with open(handle, 'w') as h:
+                with open(handle, 'w', encoding='utf-8') as h:
                     json.dump(json_data, h, indent=4)
             else:
                 raise Exception(ValueError(f"Wrong extension of handle. Expected: 'json', got: {handle.partition('.')[-1]}"))
@@ -117,9 +117,9 @@ def trace(func: callable = None, *, handle: io.TextIOWrapper | str | sqlite3.Con
                                     )
                                 )
         else:
-            raise Exception(ValueError("Unsupported type of handle: %s" % type(handle)))
+            raise ValueError("Unsupported type of handle: %s" % type(handle))
 
-        return func(*args, **kwargs)
+        return result
 
     return inner
 

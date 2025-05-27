@@ -2,7 +2,6 @@ import os
 import datetime
 import sqlite3
 from patterns.patterns import Singleton
-# from app import DB_PATH
 
 DB_NAME:    str = 'logtable'
 DB_FILE:    str = 'logtable.db'
@@ -16,57 +15,30 @@ DB_PATH:    str = os.path.join(DB_PATH, DB_FILE)
 class CRUDModel(metaclass=Singleton):
     def __init__(self, db_log_path: str = DB_PATH, db_name: str = DB_NAME):
         self._table_name: str = db_name
-        self.__con: sqlite3.Connection = sqlite3.connect(db_log_path, check_same_thread=False) # WARNING: this is unsafe TODO: db_connector?
-        self.__create_table()
-
-    # make lock logic for async?
-    # no - singleton
+        self.__con: sqlite3.Connection = sqlite3.connect(db_log_path, check_same_thread=False)
 
     def __create_table(self) -> None:
         self.__con.execute(f"CREATE TABLE IF NOT EXISTS {self._table_name} (currency_code TEXT PRIMARY KEY , rate FLOAT, datetime TEXT)")
         self.__con.commit()
     
-    # Deprecated. Reason: use by deprecated _create
-    def _read_char_codes(self) -> list[str]:
-        return [char_code[0] for char_code in self.__con.execute(f"SELECT currency_code FROM {self._table_name}")]
-
-    # Deprecated. Reason: _upsert
-    def _create(self, currencies: list[dict[str, float, str]]) -> None:
+    # upsert instead of create and update
+    def _upsert(self, currencies: list[dict[str, float, str]]) -> None:
+        # Example of currencies format:
         # currency = [
         #               {'char_code': 'USD', 'rate': 90, 'datetime': '02-04-2025 11:10'},
         #               {'char_code': 'EUR', 'rate': 91, 'datetime': '02-04-2025 11:11'},
         #               {'char_code': 'GBP', 'rate': 100, 'datetime': '02-04-2025 11:37'}
         #            ]
-        currencies_in_db: list[str] = self._read_char_codes()
-        currencies = [currency for currency in currencies if currency['char_code'] not in currencies_in_db]
-        
-        if not currencies:
-            return
-            
-        __sqlquery = f"INSERT INTO {self._table_name} (currency_code, rate, datetime) VALUES(?, ?, ?)"
-        __data = [(currency['char_code'], currency['rate'], currency['datetime']) for currency in currencies]
 
-        self.__con.executemany(__sqlquery, __data)
-        self.__con.commit()
-    
-    # Deprecated. Reason: _upsert
-    def _update(self, currencies: list[dict[str, float, str]]) -> None:
-        __sqlquery = f"UPDATE {self._table_name} SET rate = ?, datetime = ? WHERE currency_code = ?"
-        __data = [(currency['rate'], currency['datetime'], currency['char_code']) for currency in currencies]
-        self.__con.executemany(__sqlquery, __data)
-        self.__con.commit()
-    
-    def _read(self) -> list[tuple[str, float, str]]:
-        rates: list[tuple[str, float, str]] = list(
-            self.__con.execute(f"SELECT * FROM {self._table_name}")
-        )
-        return rates
-    
-    def _delete(self, char_code: str) -> None:
-        with self.__con:
-            self.__con.execute(f"DELETE FROM {self._table_name} WHERE currency_code = ?", (char_code,))
+        """Upsert data into the table.
 
-    def _upsert(self, currencies: list[dict[str, float, str]]) -> None:
+        This method does not check if currencies in the list already exist in the table.
+        If the currency already exists, its rate and datetime will be updated.
+
+        Args:
+            currencies (list[dict[str, float, str]]): A list of dictionaries containing "char_code", 
+            "rate", and "datetime" of currencies.
+        """
         sqlquery = f"""
             INSERT INTO {self._table_name} (currency_code, rate, datetime)
             VALUES (?, ?, ?)
@@ -79,6 +51,32 @@ class CRUDModel(metaclass=Singleton):
         
         with self.__con:
             self.__con.executemany(sqlquery, data)
+    
+    def _read(self) -> list[tuple[str, float, str]]:
+        """Read all data from the table.
+
+        Returns:
+            list[tuple[str, float, str]]: A list of tuples containing "char_code", "rate", and "datetime" of currencies.
+        
+        Raises:
+            sqlite3.Error: If the query fails.
+        """
+        rates: list[tuple[str, float, str]] = list(
+            self.__con.execute(f"SELECT * FROM {self._table_name}")
+        )
+        return rates
+    
+    def _delete(self, char_code: str) -> None:
+        """Delete a currency from the table.
+
+        Args:
+            char_code (str): The currency char code to be deleted.
+
+        Raises:
+            sqlite3.Error: If the deletion query fails.
+        """
+        with self.__con:
+            self.__con.execute(f"DELETE FROM {self._table_name} WHERE currency_code = ?", (char_code,))
 
     @property
     def table_name(self) -> str:

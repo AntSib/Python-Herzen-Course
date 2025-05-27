@@ -6,7 +6,6 @@ from patterns.patterns import Singleton
 class CurrencyRates(metaclass=Singleton):
     URL = "https://www.cbr.ru/scripts/XML_daily.asp"
     # CODES = {"USD": "R01235", "EUR": "R01239", "GBP": "R01035"}
-    # CODES - словарь отслеживаемых валют
 
     def __init__(self, char_codes=["USD", "EUR", "GBP"]):
         """
@@ -32,7 +31,6 @@ class CurrencyRates(metaclass=Singleton):
         :raises ValueError: If any specified character codes are not available in the response.
         :raises ConnectionError: If the request to the Central Bank of Russia fails.
         """
-
         response = requests.get(self.URL)
         if response.status_code == 200:
             tree = ElementTree.fromstring(response.content)
@@ -61,9 +59,7 @@ class CurrencyRates(metaclass=Singleton):
         if response.status_code == 200:
             tree = ElementTree.fromstring(response.content)
             for _valute in tree.findall(".//Valute"):
-                # if bool(_valute.find("CharCode")):
                 if _valute.find("CharCode").text in self._char_codes:
-                    # self._rates[_valute.find("CharCode").text] = float(_valute.find("Value").text.replace(",", "."))
                     self._rates.append({"char_code": _valute.find("CharCode").text, "rate": float(_valute.find("Value").text.replace(",", ".")), "datetime": datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
         else:
             raise ConnectionError("Не удалось получить данные с сайта ЦБ РФ")

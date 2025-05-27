@@ -19,6 +19,7 @@ def fetch():
 
     codes = request.form.get("codes").split()
     del rates_provider.rates
+    
     rates_provider.char_codes = codes
     fresh_rates = rates_provider.rates
     
@@ -28,7 +29,6 @@ def fetch():
 
 @bp.route("/delete/<code>", methods=["POST"])
 def delete(code):
-    # print(code)
     db = CRUDModel()
     db._delete(code)
 
