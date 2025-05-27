@@ -1,7 +1,7 @@
 Run Module
 =============
 
-.. automodule:: project.run
+.. automodule:: run
    :members:
    :undoc-members:
    :show-inheritance:

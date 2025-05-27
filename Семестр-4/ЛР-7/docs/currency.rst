@@ -1,7 +1,7 @@
 CRUD Module
 =============
 
-.. automodule:: project.app.models.currency
+.. automodule:: app.models.currency
    :members:
    :undoc-members:
    :show-inheritance:

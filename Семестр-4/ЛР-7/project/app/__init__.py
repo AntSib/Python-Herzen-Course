@@ -1,6 +1,6 @@
 from flask import Flask
-from project.config import Configuration
-from project.app.extensions import db
+from config import Configuration
+from app.extensions import db
 
 def create_app():
     app = Flask(__name__)
@@ -9,10 +9,10 @@ def create_app():
     db.init_app(app)
 
     with app.app_context():
-        from project.app.models import currency
-        db.create_all()
+        from app.models import currency
+        # db.create_all()
 
-    from project.app.controllers.routes import bp
+    from app.controllers.routes import bp
     app.register_blueprint(bp)
 
     return app

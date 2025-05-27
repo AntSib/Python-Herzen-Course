@@ -87,13 +87,6 @@
 <a class="viewcode-back" href="../../../routes.html#app.controllers.routes.show">[документация]</a>
 <span class="nd">@bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Render the form.html template with all currency rates.</span>
-
-<span class="sd">    Retrieves all currency rates from the database and passes them to the</span>
-<span class="sd">    &#39;form.html&#39; template for rendering.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
     <span class="n">db</span> <span class="o">=</span> <span class="n">CRUDModel</span><span class="p">()</span>
     <span class="n">currency_rates</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">_read_all</span><span class="p">()</span>
 
@@ -104,13 +97,6 @@
 <a class="viewcode-back" href="../../../routes.html#app.controllers.routes.fetch">[документация]</a>
 <span class="nd">@bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/fetch&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fetch the current currency rates from the Central Bank of Russia and save them to the database.</span>
-
-<span class="sd">    Retrieves the currency char codes from the POST request, fetches the current currency rates for the</span>
-<span class="sd">    specified &quot;char_codes&quot; from the Central Bank of Russia and saves them to the database. Redirects to the</span>
-<span class="sd">    &#39;/&#39; endpoint after successful insertion.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">codes</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;codes&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
     
     <span class="n">rates_provider</span> <span class="o">=</span> <span class="n">CurrencyRates</span><span class="p">()</span>
@@ -128,12 +114,6 @@
 <a class="viewcode-back" href="../../../routes.html#app.controllers.routes.delete">[документация]</a>
 <span class="nd">@bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/delete/&lt;currency_code&gt;&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">delete</span><span class="p">(</span><span class="n">currency_code</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Delete the specified currency rate from the database.</span>
-
-<span class="sd">    Retrieves the specified currency rate from the database based on the &quot;currency_code&quot;</span>
-<span class="sd">    parameter and deletes it. Redirects to the &#39;/&#39; endpoint after successful deletion.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">db</span> <span class="o">=</span> <span class="n">CRUDModel</span><span class="p">()</span>
     <span class="n">db</span><span class="o">.</span><span class="n">_delete</span><span class="p">(</span><span class="n">currency_code</span><span class="p">)</span>
 

@@ -1,7 +1,7 @@
 CRUD Module
 =============
 
-.. automodule:: project.app.patterns.patterns
+.. automodule:: app.patterns.patterns
    :members:
    :undoc-members:
    :show-inheritance:

@@ -48,10 +48,10 @@
 <li class="toctree-l1"><a class="reference internal" href="config.html">Config Module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="crud_model.html">CRUD Module</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">CRUD Module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#project.app.services.currency_rates.CurrencyRates"><code class="docutils literal notranslate"><span class="pre">CurrencyRates</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#project.app.services.currency_rates.CurrencyRates.URL"><code class="docutils literal notranslate"><span class="pre">CurrencyRates.URL</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#project.app.services.currency_rates.CurrencyRates.char_codes"><code class="docutils literal notranslate"><span class="pre">CurrencyRates.char_codes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#project.app.services.currency_rates.CurrencyRates.rates"><code class="docutils literal notranslate"><span class="pre">CurrencyRates.rates</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#app.services.currency_rates.CurrencyRates"><code class="docutils literal notranslate"><span class="pre">CurrencyRates</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.currency_rates.CurrencyRates.URL"><code class="docutils literal notranslate"><span class="pre">CurrencyRates.URL</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.currency_rates.CurrencyRates.char_codes"><code class="docutils literal notranslate"><span class="pre">CurrencyRates.char_codes</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#app.services.currency_rates.CurrencyRates.rates"><code class="docutils literal notranslate"><span class="pre">CurrencyRates.rates</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -86,25 +86,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-project.app.services.currency_rates">
-<span id="crud-module"></span><h1>CRUD Module<a class="headerlink" href="#module-project.app.services.currency_rates" title="Ссылка на этот заголовок"></a></h1>
+  <section id="module-app.services.currency_rates">
+<span id="crud-module"></span><h1>CRUD Module<a class="headerlink" href="#module-app.services.currency_rates" title="Ссылка на этот заголовок"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="project.app.services.currency_rates.CurrencyRates">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">project.app.services.currency_rates.</span></span><span class="sig-name descname"><span class="pre">CurrencyRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/project/app/services/currency_rates.html#CurrencyRates"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#project.app.services.currency_rates.CurrencyRates" title="Ссылка на это определение"></a></dt>
+<dt class="sig sig-object py" id="app.services.currency_rates.CurrencyRates">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">app.services.currency_rates.</span></span><span class="sig-name descname"><span class="pre">CurrencyRates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/app/services/currency_rates.html#CurrencyRates"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#app.services.currency_rates.CurrencyRates" title="Ссылка на это определение"></a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="project.app.services.currency_rates.CurrencyRates.URL">
-<span class="sig-name descname"><span class="pre">URL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://www.cbr.ru/scripts/XML_daily.asp'</span></em><a class="headerlink" href="#project.app.services.currency_rates.CurrencyRates.URL" title="Ссылка на это определение"></a></dt>
+<dt class="sig sig-object py" id="app.services.currency_rates.CurrencyRates.URL">
+<span class="sig-name descname"><span class="pre">URL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://www.cbr.ru/scripts/XML_daily.asp'</span></em><a class="headerlink" href="#app.services.currency_rates.CurrencyRates.URL" title="Ссылка на это определение"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="project.app.services.currency_rates.CurrencyRates.char_codes">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">char_codes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#project.app.services.currency_rates.CurrencyRates.char_codes" title="Ссылка на это определение"></a></dt>
+<dt class="sig sig-object py" id="app.services.currency_rates.CurrencyRates.char_codes">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">char_codes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#app.services.currency_rates.CurrencyRates.char_codes" title="Ссылка на это определение"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="project.app.services.currency_rates.CurrencyRates.rates">
-<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#project.app.services.currency_rates.CurrencyRates.rates" title="Ссылка на это определение"></a></dt>
+<dt class="sig sig-object py" id="app.services.currency_rates.CurrencyRates.rates">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rates</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#app.services.currency_rates.CurrencyRates.rates" title="Ссылка на это определение"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>

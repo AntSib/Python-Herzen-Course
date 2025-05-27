@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime
 from xml.etree import ElementTree
-from project.app.patterns.patterns import Singleton
+from app.patterns.patterns import Singleton
 
 class CurrencyRates(metaclass=Singleton):
     URL = "https://www.cbr.ru/scripts/XML_daily.asp"

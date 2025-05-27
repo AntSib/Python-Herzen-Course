@@ -1,9 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from project.app.extensions import db
+from app.extensions import db
 
 class Currency(db.Model):
-    """A class representing a currency."""
     __tablename__ = 'currencies'
 
     currency_code = db.Column(db.String, primary_key=True)
