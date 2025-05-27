@@ -2,7 +2,7 @@ import os
 import datetime
 from app.patterns.patterns import Singleton
 from app.models.currency import Currency
-from app.extensions import db
+from app.database_setup import db
 
 
 class CRUDModel(metaclass=Singleton):

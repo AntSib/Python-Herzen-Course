@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-from app.extensions import db
+from app.database_setup import db
 
 class Currency(db.Model):
     __tablename__ = 'currencies'
