@@ -1,6 +1,4 @@
 from fastapi import FastAPI
-# 
-# from app.api.v1 import user
 from api.v2 import term
 
 from core.database import Base, engine
@@ -11,3 +9,7 @@ app = FastAPI()
 
 # Routers
 app.include_router(term.router, prefix="/api/v2/term", tags=["Terms"])
+
+@app.on_event("startup")
+def on_startup():
+    Base.metadata.create_all(bind=engine)

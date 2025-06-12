@@ -43,6 +43,17 @@ def read_term(term_name, db: Session = Depends(get_db_session)) -> TermRead:
 
 @router.post("/terms/{term}", response_model=TermRead)
 def create_term(term: TermCreate = Depends(), db: Session = Depends(get_db_session)) -> TermCreate:
+    """Create term.
+
+    Args:
+        term (TermCreate): term to create.
+
+    Raises:
+        HTTPException: 409 if term already exists.
+
+    Returns:
+        TermCreate: created term.
+    """
     crud = CRUDTerm(db, Term)
     created = crud.create(term)
     if not created:
@@ -51,6 +62,18 @@ def create_term(term: TermCreate = Depends(), db: Session = Depends(get_db_sessi
 
 @router.put("/terms/{term}", response_model=TermCreate)
 def update_term(term: TermCreate = Depends(), db: Session = Depends(get_db_session)) -> TermCreate:
+    """Update an existing term.
+
+    Args:
+        term (TermCreate): The term data to update.
+        db (Session): Database session dependency.
+
+    Raises:
+        HTTPException: 404 error if the term is not found.
+
+    Returns:
+        TermCreate: The updated term data.
+    """
     crud = CRUDTerm(db, Term)
     updated = crud.update(term)
     if not updated:
@@ -59,6 +82,17 @@ def update_term(term: TermCreate = Depends(), db: Session = Depends(get_db_sessi
 
 @router.delete("/terms/{term_name}")
 def delete_term(term_name: str, db: Session = Depends(get_db_session)):
+    """Delete term by name.
+
+    Args:
+        term_name (str): term name.
+
+    Raises:
+        HTTPException: 404 if term not found.
+
+    Returns:
+        dict[str, str]: deleted term name with message 'deleted successfully'.
+    """
     crud = CRUDTerm(db, Term)
     deleted = crud.delete(term_name)
     if not deleted:
@@ -68,6 +102,7 @@ def delete_term(term_name: str, db: Session = Depends(get_db_session)):
 
 @router.get("/author")
 def author() -> dict[str, str]:
+    """Return author name and current date/time in Russian locale."""
     from datetime import datetime
     import locale
     locale.setlocale(locale.LC_ALL, 'ru_RU')

@@ -1,3 +1,5 @@
+name: fastapi-nginx
+
 services:
   fastapi:
     build: ./app
