@@ -32,6 +32,7 @@
 
 Для развёртывания приложения используется Docker/Docker-Compose + Nginx.
 
+![fastapi-docs](illust/fastapi_docs.png)
 
 ### Структура проекта:
 ```bash
