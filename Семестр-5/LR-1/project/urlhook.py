@@ -30,7 +30,6 @@ def url_hook(some_str: str) -> object:
         raise ImportError(f"Failed to fetch module from {some_str}: {e}")
 
     data = responce.text
-    print(data)
 
     filenames = re.findall("[a-zA-Z_][a-zA-Z0-9_]*.py", data)
     modnames = {name[:-3] for name in filenames}
