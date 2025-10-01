@@ -20,7 +20,7 @@ class FibonacciList:
 
             if value in self._fib_set:
                 return value
-    
+
     def _generate_fib_up_to(self, limit: int = 0) -> set[int]:
         """Generates a set of Fibonacci numbers up to the given limit."""
         fib_set: set = {0, 1}
@@ -28,7 +28,7 @@ class FibonacciList:
         while a <= limit:
             a, b = b, a + b
             fib_set.add(a)
-        
+
         return fib_set
 
     def __check_input(self):
@@ -58,7 +58,7 @@ class FibonacciListGetItem:
         while a <= limit:
             a, b = b, a + b
             fib_set.add(a)
-        
+
         return fib_set
 
     def __getitem__(self, index: int) -> int:
@@ -68,7 +68,7 @@ class FibonacciListGetItem:
     def __len__(self) -> int:
         """Allow len() to be used on the object."""
         return len(self._filtered)
-    
+
     def __check_input(self):
         """
         Checks that the input is a list and contains only integers.
@@ -97,8 +97,6 @@ def run_fib_getitem():
     print(fib_filter[3])
 
 
-
 if __name__ == "__main__":
     run_fib_next()
     run_fib_getitem()
-    

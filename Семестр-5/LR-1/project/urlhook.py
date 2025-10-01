@@ -1,10 +1,12 @@
 import re
+
 import requests
 from url_finder import URLFinder
 
 
 def url_hook(some_str: str) -> object:
-    """Return a finder object for remote modules at given URL.
+    """
+    Return a finder object for remote modules at given URL.
 
     Downloads the directory listing from the given URL and looks for
     .py files. The names of those files (without .py) are used as module
@@ -15,7 +17,7 @@ def url_hook(some_str: str) -> object:
 
     Args:
         some_str (str): URL
-    
+
     Returns:
         object: URLFinder
 
@@ -35,4 +37,3 @@ def url_hook(some_str: str) -> object:
     modnames = {name[:-3] for name in filenames}
 
     return URLFinder(some_str, modnames)
-

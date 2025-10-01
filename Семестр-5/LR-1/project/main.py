@@ -1,6 +1,6 @@
 import sys
-from urlhook import url_hook
 
+from urlhook import url_hook
 
 if __name__ == "__main__":
     url = "http://localhost:8000/"

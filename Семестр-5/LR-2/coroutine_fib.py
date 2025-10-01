@@ -10,12 +10,15 @@ def coroutine(func: callable) -> callable:
 
     Returns:
         callable: A generator function that has been primed.
+
     """
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         generator = func(*args, **kwargs)
         next(generator)
         return generator
+
     return wrapper
 
 
@@ -24,7 +27,7 @@ def gen_fib() -> list[int]:
     """
     A generator that yields a Fibonacci sequence of a given length.
 
-    The generator takes an integer as input and yields a list 
+    The generator takes an integer as input and yields a list
     of integers representing the Fibonacci sequence of that length.
 
     Args:
@@ -32,6 +35,7 @@ def gen_fib() -> list[int]:
 
     Yields:
         list[int]: A list of integers representing the Fibonacci sequence of length n.
+
     """
     n = yield
     while True:
@@ -45,7 +49,6 @@ def gen_fib() -> list[int]:
             a, b = b, a + b
 
         n = yield fib_seq
-
 
 
 if __name__ == "__main__":
