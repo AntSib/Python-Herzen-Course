@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Currency rates
+{% endblock %}
+
+{% block content_title %}
+  Currency rates
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<div>
+  <strong>Client ID:</strong>
+  <span id="client-id">—</span>
+</div>
+
+<form id="codes-form">
+  <input id="codes-input" placeholder="USD EUR GBP">
+  <button type="submit">Загрузить</button>
+</form>
+
+<table id="rates-table">
+  <tr>
+    <th>Currency</th>
+    <th>Rate</th>
+    <th>Date</th>
+    <th></th>
+  </tr>
+</table>
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='currency_ws.js') }}"></script>
+
+{% endblock %}
