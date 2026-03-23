@@ -52,7 +52,7 @@ project/
 ```yaml
 on:
   push:
-    workflows: build-hugo-site
+    workflows: [build-hugo-site]
     filter:
       branches: main
 
@@ -61,9 +61,18 @@ workflows:
     env:
       HUGO_VERSION: 0.157.0
     tasks:
-      - name: build-and-deploy
+      - name: Check-markdown-links
         cubes:
-          - name: Download_Hugo
+          - name: Run-markdown-link-check
+            action: tcort/github-action-markdown-link-check@v1
+            with:
+              base-branch: main
+              use-verbose-mode: yes
+
+      - name: Build-and-deploy
+        needs: [Check-markdown-links]
+        cubes:
+          - name: Download-Hugo
             script:
               # Download Hugo package
               - curl -LJO https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
@@ -107,10 +116,11 @@ workflows:
 
 Для развёртывания был взят, созданный ранее, сайт на Hugo. 
 Пайплайн CI/CD выполняет следующие действия:
-1. Скачивает и устанавливает пакет Hugo.
-2. Выводит в качестве отладочной информации установленную версию Hugo.
-3. Создает директорию для сборки с сайтом и выполняет сборку.
-4. Публикует сборку на sourcecraft.site.
+1. Проверяет синтаксис ссылок в файлах Markdown.
+2. Скачивает и устанавливает пакет Hugo.
+3. Выводит в качестве отладочной информации установленную версию Hugo.
+4. Создает директорию для сборки с сайтом и выполняет сборку.
+5. Публикует сборку на sourcecraft.site.
 
 
 ### Анализ
