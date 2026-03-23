@@ -19,7 +19,7 @@
 
 
 
-Ссылка на репозиторий SourceCraft: [Репозиторий](https://sourcecraft.dev/antsib-public/hugo-portfolio?rev=main). Ссылка на [сайт](https://antsib-public.sourcecraft.site/hugo-portfolio/)
+Ссылка на [репозиторий SourceCraft](https://sourcecraft.dev/antsib-public/hugo-portfolio?rev=main). Ссылка на [сайт](https://antsib-public.sourcecraft.site/hugo-portfolio/).
 
 ### Структура проекта
 
@@ -105,7 +105,7 @@ workflows:
 
 ## Описание проделанной работы
 
-Для развёртывания был взят созданный ранее сайт на Hugo. 
+Для развёртывания был взят, созданный ранее, сайт на Hugo. 
 Пайплайн CI/CD выполняет следующие действия:
 1. Скачивает и устанавливает пакет Hugo.
 2. Выводит в качестве отладочной информации установленную версию Hugo.
