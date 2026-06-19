@@ -1039,7 +1039,15 @@ if __name__ == "__main__":
 ```
 
 Однако данная программа крайне сложна для выполнения при помощи LLM. Программу пришлось дополнительно отлаживать, а результата оставляет желать лучшего.
-![plot](./plotter/cpu.png)
+
+Flask:
+![Flask](./plotter/img/Figure_1.png)
+
+Sanic:
+![Sanic](./plotter/img/Figure_2.png)
+
+Tornado:
+![Tornado](./plotter/img/Figure_3.png)
 
 
 ### Анализ использования техник промптинга
